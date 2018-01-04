@@ -3,31 +3,38 @@ import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {fromEvent} from "rxjs/observable/fromEvent";
 import {NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig} from "./config";
 import {Monaco} from "./monaco";
-
 declare const monaco: any;
 
 @Component({
-  selector: "ngx-monaco-editor",
-  template: `<div class="editor-container" #editorContainer></div>`,
+  selector: "ngx-monaco-diff-editor",
+  template: `<div class="diff-editor-container" #diffEditorContainer></div>`,
   styles: [`
     :host {
       display: block;
       height: 200px;
     }
 
-    .editor-container {
+    .diff-editor-container {
       width: 100%;
       height: 98%;
     }
   `],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => EditorComponent),
+    useExisting: forwardRef(() => DiffEditorComponent),
     multi: true
   }]
 })
-export class EditorComponent extends Monaco {
-  @ViewChild("editorContainer") editorContainer: ElementRef;
+export class DiffEditorComponent extends Monaco {
+  @ViewChild("diffEditorContainer") diffEditorContainer: ElementRef;
+  @Input() previousCode : {
+    code: string,
+    language: string
+  };
+  @Input() currentCode : {
+    code: string,
+    language: string
+  };
 
 
   constructor(protected zone: NgZone,
@@ -36,17 +43,13 @@ export class EditorComponent extends Monaco {
   }
 
   @Input() initMonaco = (options: any) => {
-    this.editor = monaco.editor.create(this.editorContainer.nativeElement, options);
-    this.editor.setValue(this.value);
-    this.editor.onDidChangeModelContent((e: any) => {
-      const value = this.editor.getValue();
-      this.propagateChange(value);
-      // value is not propagated to parent when executing outside zone.
-      this.zone.run(() => this.value = value);
-    });
+    const previousCode = monaco.editor.createModel(this.previousCode.code, this.previousCode.language);
+    const currentCode = monaco.editor.createModel(this.currentCode.code, this.currentCode.language);
 
-    this.editor.onDidBlurEditor((e: any) => {
-      this.onTouched();
+    this.editor = monaco.editor.createDiffEditor(this.diffEditorContainer.nativeElement, options);
+    this.editor.setModel({
+      original: previousCode,
+      modified: currentCode
     });
 
     // refresh layout on resize event.

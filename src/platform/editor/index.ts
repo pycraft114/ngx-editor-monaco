@@ -1,2 +1,2 @@
-export * from './editor.module';
+export * from './monaco.module';
 export * from './config';
