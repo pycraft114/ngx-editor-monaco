@@ -1,6 +1,6 @@
 {
-  "name": "ngx-monaco-editor",
-  "version": "2.0.1",
+  "name": "ngx-editor-monaco",
+  "version": "1.0.0",
   "private": false,
   "description": "Monaco Code Editor for Angular",
   "main": "./editor.umd.js",
@@ -20,15 +20,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/atularen/ngx-monaco-editor.git"
+    "url": "https://github.com/pycraft114/ngx-editor-monaco.git"
   },
   "bugs": {
-    "url": "https://github.com/atularen/ngx-monaco-editor/issues"
+    "url": "https://github.com/pycraft114/ngx-editor-monaco.git/issues"
   },
   "license": "MIT",
-  "author": "Atul Kumar",
+  "author": "pycraft114",
   "contributors": [
-    "Atul Kumar <atulaggarwal4288@gmail.com>"
+    "pycraft114 <pycraft114@gmail.com>"
   ],
   "peerDependencies": {
     "@angular/common": ">= 2.0.0",

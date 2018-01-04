@@ -1,13 +1,13 @@
 import {Component, ElementRef, forwardRef, Inject, Input, NgZone, ViewChild} from "@angular/core";
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {fromEvent} from "rxjs/observable/fromEvent";
-import {NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig} from "./config";
 import {Monaco} from "./monaco";
+import {MONACO_EDITOR_CONFIG, MonacoEditorConfig} from "./config";
 
 declare const monaco: any;
 
 @Component({
-  selector: "ngx-monaco-editor",
+  selector: "monaco-editor",
   template: `<div class="editor-container" #editorContainer></div>`,
   styles: [`
     :host {
@@ -31,7 +31,7 @@ export class EditorComponent extends Monaco {
 
 
   constructor(protected zone: NgZone,
-              @Inject(NGX_MONACO_EDITOR_CONFIG) protected config: NgxMonacoEditorConfig) {
+              @Inject(MONACO_EDITOR_CONFIG) protected config: MonacoEditorConfig) {
     super(zone, config);
   }
 

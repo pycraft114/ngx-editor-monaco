@@ -1,8 +1,8 @@
 import { InjectionToken } from '@angular/core';
 
-export const NGX_MONACO_EDITOR_CONFIG = new InjectionToken('NGX_MONACO_EDITOR_CONFIG');
+export const MONACO_EDITOR_CONFIG = new InjectionToken('MONACO_EDITOR_CONFIG');
 
-export interface NgxMonacoEditorConfig {
+export interface MonacoEditorConfig {
   baseUrl?: string;
   defaultOptions?: { [key: string]: any; },
   onMonacoLoad?: Function;

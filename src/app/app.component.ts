@@ -12,9 +12,9 @@ declare const monaco: any;
     <button (click)="code = null; codeInput=null">Set Value To Null</button>
     <button (click)="code = undefined; codeInput=undefined">Set Value To undefined</button>
     <button (click)="toggle = !toggle">Toggle Editor</button>
-    <ngx-monaco-editor [options]="options" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
-    <ngx-monaco-editor *ngIf="toggle" [options]="options" [(ngModel)]="code"></ngx-monaco-editor>
-    <ngx-monaco-diff-editor [options]="options" [previousCode]="previousCode" [currentCode]="currentCode" (onInit)="onInit($event)"></ngx-monaco-diff-editor>
+    <monaco-editor [options]="options" [(ngModel)]="code" (onInit)="onInit($event)"></monaco-editor>
+    <monaco-editor *ngIf="toggle" [options]="options" [(ngModel)]="code"></monaco-editor>
+    <monaco-diff-editor [options]="options" [previousCode]="previousCode" [currentCode]="currentCode" (onInit)="onInit($event)"></monaco-diff-editor>
     <input type="text" [(ngModel)]="codeInput"  #inputControl/>
     {{codeInput | json}} {{inputControl.value | json}}
     <pre>{{code}}</pre>

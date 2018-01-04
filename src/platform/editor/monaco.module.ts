@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
-import { Monaco } from './monaco';
+import {CommonModule} from "@angular/common";
+import {ModuleWithProviders, NgModule} from "@angular/core";
+import {MONACO_EDITOR_CONFIG, MonacoEditorConfig} from "./config";
+import {Monaco} from "./monaco";
 import {EditorComponent} from "./editor.component";
 import {DiffEditorComponent} from "./diff-editor.component";
 
@@ -20,11 +20,11 @@ import {DiffEditorComponent} from "./diff-editor.component";
   ]
 })
 export class MonacoModule {
-  public static forRoot(config: NgxMonacoEditorConfig = {}): ModuleWithProviders {
+  public static forRoot(config: MonacoEditorConfig = {}): ModuleWithProviders {
     return {
       ngModule: MonacoModule,
       providers: [
-        { provide: NGX_MONACO_EDITOR_CONFIG, useValue: config }
+        {provide: MONACO_EDITOR_CONFIG, useValue: config}
       ]
     };
   }

@@ -1,7 +1,8 @@
 import {AfterViewInit, Component, EventEmitter, forwardRef, Inject, Input, NgZone, Output} from "@angular/core";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Subscription} from "rxjs/Subscription";
-import {NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig} from "./config";
+import {MONACO_EDITOR_CONFIG, MonacoEditorConfig} from "./config";
+
 
 let loadedMonaco: boolean = false;
 let loadPromise: Promise<void>;
@@ -18,7 +19,7 @@ declare const require: any;
 })
 export class Monaco implements AfterViewInit, ControlValueAccessor {
   @Output() onInit = new EventEmitter<any>();
-  @Input() initMonaco;
+  @Input() initMonaco: any;
   public value: string = '';
   public editor: any;
   public _options: any;
@@ -30,7 +31,7 @@ export class Monaco implements AfterViewInit, ControlValueAccessor {
 
   constructor(
     protected zone: NgZone,
-    @Inject(NGX_MONACO_EDITOR_CONFIG) protected config: NgxMonacoEditorConfig) {
+    @Inject(MONACO_EDITOR_CONFIG) protected config: MonacoEditorConfig) {
   }
 
   writeValue(value: any): void {
