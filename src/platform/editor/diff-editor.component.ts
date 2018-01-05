@@ -3,11 +3,11 @@ import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {fromEvent} from "rxjs/observable/fromEvent";
 import {Monaco} from "./monaco";
 import {MONACO_EDITOR_CONFIG, MonacoEditorConfig} from "./config";
-declare const monaco: any;
 
 @Component({
   selector: "monaco-diff-editor",
-  template: `<div class="diff-editor-container" #diffEditorContainer></div>`,
+  template: `
+    <div class="diff-editor-container" #diffEditorContainer></div>`,
   styles: [`
     :host {
       display: block;
@@ -27,11 +27,11 @@ declare const monaco: any;
 })
 export class DiffEditorComponent extends Monaco {
   @ViewChild("diffEditorContainer") diffEditorContainer: ElementRef;
-  @Input() previousCode : {
+  @Input() previousCode: {
     code: string,
     language: string
   };
-  @Input() currentCode : {
+  @Input() currentCode: {
     code: string,
     language: string
   };

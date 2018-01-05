@@ -6,11 +6,9 @@ import {MONACO_EDITOR_CONFIG, MonacoEditorConfig} from "./config";
 
 let loadedMonaco: boolean = false;
 let loadPromise: Promise<void>;
-declare const monaco: any;
-declare const require: any;
 
 @Component({
-  template:'',
+  template: "",
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => Monaco),
@@ -20,7 +18,7 @@ declare const require: any;
 export class Monaco implements AfterViewInit, ControlValueAccessor {
   @Output() onInit = new EventEmitter<any>();
   @Input() initMonaco: any;
-  public value: string = '';
+  public value: string = "";
   public editor: any;
   public _options: any;
   public windowResizeSubscription: Subscription;
@@ -29,13 +27,12 @@ export class Monaco implements AfterViewInit, ControlValueAccessor {
   onTouched = () => {
   };
 
-  constructor(
-    protected zone: NgZone,
-    @Inject(MONACO_EDITOR_CONFIG) protected config: MonacoEditorConfig) {
+  constructor(protected zone: NgZone,
+              @Inject(MONACO_EDITOR_CONFIG) protected config: MonacoEditorConfig) {
   }
 
   writeValue(value: any): void {
-    this.value = value || '';
+    this.value = value || "";
     // Fix for value change while dispose in process.
     setTimeout(() => {
       if (this.editor) {
@@ -53,7 +50,7 @@ export class Monaco implements AfterViewInit, ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  @Input('options')
+  @Input("options")
   set options(options: string) {
     this._options = Object.assign({}, this.config.defaultOptions, options);
     if (this.editor) {
@@ -75,16 +72,16 @@ export class Monaco implements AfterViewInit, ControlValueAccessor {
     } else {
       loadedMonaco = true;
       loadPromise = new Promise<void>((resolve: any) => {
-        const baseUrl = this.config.baseUrl || '/assets';
-        if (typeof((<any>window).monaco) === 'object') {
+        const baseUrl = this.config.baseUrl || "/assets";
+        if (typeof((<any>window).monaco) === "object") {
           resolve();
           return;
         }
         const onGotAmdLoader: any = () => {
           // Load monaco
-          (<any>window).require.config({ paths: { 'vs': `${baseUrl}/monaco/vs` } });
-          (<any>window).require(['vs/editor/editor.main'], () => {
-            if (typeof this.config.onMonacoLoad === 'function') {
+          (<any>window).require.config({paths: {"vs": `${baseUrl}/monaco/vs`}});
+          (<any>window).require(["vs/editor/editor.main"], () => {
+            if (typeof this.config.onMonacoLoad === "function") {
               this.config.onMonacoLoad();
             }
             this.initMonaco(this.options);
@@ -94,10 +91,10 @@ export class Monaco implements AfterViewInit, ControlValueAccessor {
 
         // Load AMD loader if necessary
         if (!(<any>window).require) {
-          const loaderScript: HTMLScriptElement = document.createElement('script');
-          loaderScript.type = 'text/javascript';
+          const loaderScript: HTMLScriptElement = document.createElement("script");
+          loaderScript.type = "text/javascript";
           loaderScript.src = `${baseUrl}/monaco/vs/loader.js`;
-          loaderScript.addEventListener('load', onGotAmdLoader);
+          loaderScript.addEventListener("load", onGotAmdLoader);
           document.body.appendChild(loaderScript);
         } else {
           onGotAmdLoader();

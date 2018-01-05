@@ -3,8 +3,13 @@ import {NG_VALUE_ACCESSOR} from "@angular/forms";
 import {fromEvent} from "rxjs/observable/fromEvent";
 import {Monaco} from "./monaco";
 import {MONACO_EDITOR_CONFIG, MonacoEditorConfig} from "./config";
+import IEditor = monaco.editor.IEditor;
 
-declare const monaco: any;
+
+
+
+
+
 
 @Component({
   selector: "monaco-editor",
@@ -28,6 +33,7 @@ declare const monaco: any;
 })
 export class EditorComponent extends Monaco {
   @ViewChild("editorContainer") editorContainer: ElementRef;
+  public editor2 : IEditor;
 
 
   constructor(protected zone: NgZone,
